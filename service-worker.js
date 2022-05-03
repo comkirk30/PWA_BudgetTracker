@@ -32,3 +32,33 @@ self.addEventListener("fetch", function (e) {
     })
   );
 });
+
+self.addEventListener("install", function (e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      console.log("installing the cache : " + CACHE_NAME);
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
+});
+
+self.addEventListener("activate", function (e) {
+  e.waitUntil(
+    caches.keys().then(function (keysList) {
+      let cacheListKeep = keysList.filter(function (key) {
+        return key.indexOf(APP_PREFIX);
+      });
+
+      cacheListKeep.push(CACHE_NAME);
+
+      return Promise.all(
+        keysList.map(function (key, i) {
+          if (cacheListKeep.indexOf(key) === -1) {
+            console.log("delete the cache: " + keysList[i]);
+            return caches.delete(keysList[i]);
+          }
+        })
+      );
+    })
+  );
+});
