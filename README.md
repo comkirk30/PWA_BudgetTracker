@@ -12,6 +12,11 @@ WHEN the user reestablishes an internet connection
 THEN the deposits or expenses added while they were offline are added to their transaction history and their totals are updated
 
 
+Screen shot:
+![image](https://user-images.githubusercontent.com/94499329/166574072-d24ca69f-8c23-4d47-b0e0-d8a439ab1bfe.png)
+
+
+
 ## Author
 
 Courtney Martin
